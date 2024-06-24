@@ -1,0 +1,65 @@
+1) npm init -y
+2) instalara Typescript
+npm i typescript tsx @types/node -D
+npx tsc --init
+no tsconfig.json configurar :
+ "target": "es2021", 
+ "baseUrl": "./",                                
+ "paths": {
+      "@/*": ["src/*"],
+     },  
+
+ao final do arquivo acrescentar
+
+  },
+  "include": [
+    "src"
+  ]
+}
+
+3) Instalar o Prisma o ORM que vai manipular o BD
+npm i prisma -D
+depois 
+definicao de fonte de dados
+npx prisma init --datasource-provider sqlite
+
+4) criar mgratioons
+User
+colocar os campos
+depois 
+npx prisma migrate dev --name add-user-table
+
+Tabela Patient
+colocar campos e relaacao com User
+depois 
+npx prisma migrate dev --name add-patient-table
+
+Tabela Doctor, Appointment e Agenda
+teve a uylizacao  de [] em alguns campos q indica q pode ter várioa campos nesse relaacao
+npx prisma migrate dev --name add-doctor-agenda-appointment-table
+
+5) Inicializar a API 
+criar o arquivo dentro de SRC --> server.ts
+e o app.ts
+
+npm i express cors helmet
+helmet para seguranca
+
+npm i -D @types/cors
+
+6) criar dentro de src uma pasta infra
+
+7) npm i -D @types/express
+
+8) criacao de Router. ts server.ts app.ts
+
+9) nom run dev
+
+10) alteracao no pacckage.json no Scripts
+
+11) npm i express-async-errors
+
+12) npx prisma migrate dev --name add-unique-field-patient
+
+13) npm i bcrypt
+npm i -D @types/bcrypt
