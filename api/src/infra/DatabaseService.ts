@@ -50,6 +50,35 @@ export default class DatabaseService {
         })
     }
 
+    getPatientById( id: number ) {
+        return this.connection.patient.findUnique({
+            where: { id },
+        })
+    }
+
+    getAgendaById( id: number ) {
+        return this.connection.agenda.findUnique({
+            where: { id },
+        })
+    }
+
+    updateAgenda(id: number, data: {avaliable: boolean} ){
+        return this.connection.agenda.update({
+            where: { id },
+            data,
+        })
+    }
+
+    createAppoitment( patientId: number, doctorId: number, date: Date ) {
+        return this.connection.appointment.create({
+            data: {
+                patientId,
+                doctorId,
+                date,
+            }
+        })
+    }
+
 
 }
 

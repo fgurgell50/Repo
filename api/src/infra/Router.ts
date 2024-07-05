@@ -30,6 +30,7 @@ export default class Router {
 
         this.app.get('/doctors', this.doctorController.listDoctor)
         this.app.post('/patient', this.patientController.createPatient)
+        this.app.post('/patient/appointment', this.patientController.createAppointment )
     }
 
     public start(port: number) {

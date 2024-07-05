@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import  { database } from "@/infra//DatabaseService";
 import PatientController from "@/application/controller/PatienteController";
 import CreatePatientUseCase from "@/application/useCases/patient/CreatePatient";
+import CreateAppointementUseCase from "@/application/useCases/patient/CreateAppointment";
 
 export default class PatientControllerImpl implements PatientController{
 
@@ -14,8 +15,12 @@ export default class PatientControllerImpl implements PatientController{
         res.status(201).json(patient)
     }
 
-    createAppointment(req: Request, res: Response): Promise<void>{
-        throw new Error('Method not implem')
+    async createAppointment(req: Request, res: Response){
+        const { patientId, agendaId } = req.body
+        const useCase = new CreateAppointementUseCase(database)
+        const appointment =await useCase.execute( patientId, agendaId )
+        
+        res.status(201).json(appointment)
     }
 
 }
