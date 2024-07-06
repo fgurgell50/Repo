@@ -16,9 +16,10 @@ export default class PatientControllerImpl implements PatientController{
     }
 
     async createAppointment(req: Request, res: Response){
-        const { patientId, agendaId } = req.body
+        const { agendaId } = req.body
+        const { patientId } = req.params
         const useCase = new CreateAppointementUseCase(database)
-        const appointment =await useCase.execute( patientId, agendaId )
+        const appointment = await useCase.execute( Number(patientId), Number(agendaId) )
         
         res.status(201).json(appointment)
     }

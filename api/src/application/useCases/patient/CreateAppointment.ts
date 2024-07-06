@@ -5,6 +5,7 @@ export default class CreateAppointementUseCase {
 
     }
     async execute(patientId: number, agendaId: number ) {
+
         //verifica se o paciente existe com o id passado
         const patient = await this.database.getPatientById( patientId )
 
