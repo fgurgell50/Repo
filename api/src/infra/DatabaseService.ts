@@ -6,7 +6,12 @@ export default class DatabaseService {
     }
     listDoctor(){
         // logica de acesso ao banco de dados
-        return this.connection.doctor.findMany()
+        return this.connection.doctor.findMany({
+            include: {
+                agenda: true,
+            },
+         
+        })
     }
 
     getDoctorById( id: number, includeAgenda: boolean = false) {
@@ -58,7 +63,7 @@ export default class DatabaseService {
 
     getAgendaById( id: number ) {
         return this.connection.agenda.findUnique({
-            where: { id },
+            where: {id},
         })
     }
 

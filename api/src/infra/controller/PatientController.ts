@@ -19,7 +19,10 @@ export default class PatientControllerImpl implements PatientController{
         const { agendaId } = req.body
         const { patientId } = req.params
         const useCase = new CreateAppointementUseCase(database)
-        const appointment = await useCase.execute( Number(patientId), Number(agendaId) )
+        const appointment = await useCase.execute(
+             Number(patientId), 
+             Number(agendaId) 
+            )
         
         res.status(201).json(appointment)
     }
