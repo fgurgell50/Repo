@@ -24,16 +24,17 @@ export default class Router {
 
     private setRouter(){
         // Rotas da Aplicacao
+        this.app.post('/authenticate', this.patientController.authenticate)
         this.app.get('/', (req,res) => {
             res.send('Hello App')
         })
-
         this.app.get('/doctors', this.doctorController.listDoctor)
         this.app.post('/patient', this.patientController.createPatient)
         this.app.post(
             '/patient/:patientId/appointment', 
             this.patientController.createAppointment 
         )
+
     }
 
     public start(port: number) {

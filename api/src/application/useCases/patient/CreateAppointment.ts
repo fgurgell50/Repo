@@ -14,10 +14,8 @@ export default class CreateAppointementUseCase {
         }
 
         //verififa se a agenda existe com o ID passado e está disponível
-        console.log('AgendaID', agendaId)
         const agenda = await this.database.getAgendaById(agendaId)
-        console.log('Agenda', agenda)
-
+        
         if( !agenda?.avaliable ){
             throw new Error('Agenda not available for this date')
         }

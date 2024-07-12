@@ -3,6 +3,7 @@ import  { database } from "@/infra//DatabaseService";
 import PatientController from "@/application/controller/PatienteController";
 import CreatePatientUseCase from "@/application/useCases/patient/CreatePatient";
 import CreateAppointementUseCase from "@/application/useCases/patient/CreateAppointment";
+import AuthenticatePatientUseCase from "@/application/useCases/patient/AuthenticatePatient";
 
 export default class PatientControllerImpl implements PatientController{
 
@@ -25,6 +26,14 @@ export default class PatientControllerImpl implements PatientController{
             )
         
         res.status(201).json(appointment)
+    }
+
+    async authenticate(req: Request, res: Response){
+    const  { phone, password } = req.body
+    const useCase = new AuthenticatePatientUseCase(database)
+    const patient = await useCase.execute(phone, password)
+
+    res.status(200).json(patient)
     }
 
 }

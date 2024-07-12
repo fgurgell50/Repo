@@ -13,6 +13,7 @@ export default class DatabaseService {
          
         })
     }
+    
 
     getDoctorById( id: number, includeAgenda: boolean = false) {
         return this.connection.doctor.findUnique(
@@ -33,6 +34,15 @@ export default class DatabaseService {
                         appointment: includeAppointment,    
                  },
             }
+        )
+    }
+
+    getUserByPhone( phone: string) {
+        return this.connection.user.findUnique(
+            {
+                where: {phone},
+
+            },
         )
     }
 
@@ -83,8 +93,6 @@ export default class DatabaseService {
             }
         })
     }
-
-
 }
 
 export const database = new DatabaseService( new PrismaClient() )
