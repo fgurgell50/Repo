@@ -63,3 +63,5 @@ npm i -D @types/cors
 
 13) npm i bcrypt
 npm i -D @types/bcrypt
+
+14) npm i joi ( para ValidationMiddleware )
