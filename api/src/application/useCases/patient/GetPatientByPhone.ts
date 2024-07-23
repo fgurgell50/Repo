@@ -1,5 +1,6 @@
 
 import DatabaseService from "@/infra/DatabaseService";
+import { NotFoundError } from "@/infra/helpers/Errors";
 
 export default class GetPatientByPhoneUseCase {
     constructor(readonly database: DatabaseService ) {
@@ -16,7 +17,7 @@ export default class GetPatientByPhoneUseCase {
         )
 
         if(!patient){
-            throw new Error('No doctot found')
+            throw new NotFoundError('No doctot found')
         }
 
         return patient

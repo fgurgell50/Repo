@@ -1,4 +1,5 @@
 import DatabaseService from "@/infra/DatabaseService";
+import { BusinessError, NotFoundError } from "@/infra/helpers/Errors";
 import { comparePassword, encodeToBase64 } from "@/infra/helpers/SecurityHelper";
 
 export default class AuthenticatePatientUseCase{
@@ -10,7 +11,7 @@ export default class AuthenticatePatientUseCase{
         const user = await this.database.getUserByPhone(phone)
 
         if(!user){
-            throw new Error('Patiente not found')
+            throw new NotFoundError('Patiente not found')
         }
 
         //converte a senha oara hash
@@ -20,7 +21,7 @@ export default class AuthenticatePatientUseCase{
         const isPasswordValid = comparePassword(password, user.password)
 
         if(!isPasswordValid){
-            throw new Error('Phone or Password is Invalid')
+            throw new BusinessError('Phone or Password is Invalid')
         }
 
         //retorno um token de autenticacao
