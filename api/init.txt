@@ -65,3 +65,6 @@ npm i -D @types/cors
 npm i -D @types/bcrypt
 
 14) npm i joi ( para ValidationMiddleware )
+
+Frontend
+npx create-next-app@latest --tailwind --ts
