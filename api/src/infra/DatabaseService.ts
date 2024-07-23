@@ -15,7 +15,10 @@ export default class DatabaseService {
     }
     
 
-    getDoctorById( id: number, includeAgenda: boolean = false) {
+    getDoctorById( 
+        id: number, 
+        includeAgenda: boolean = false
+    ) {
         return this.connection.doctor.findUnique(
             {
                 where: {id},
@@ -26,12 +29,23 @@ export default class DatabaseService {
         )
     }
 
-    getPatientByPhone( phone: string, includeAppointment: boolean = false) {
+    getPatientByPhone( 
+        phone: string, 
+        includeAppointment: boolean = false,
+        includeDoctor: boolean = false
+    ) 
+    {
         return this.connection.patient.findUnique(
             {
                 where: {phone},
                 include: {
-                        appointment: includeAppointment,    
+                        appointment: !includeAppointment
+                        ? false 
+                        : {
+                            include: {
+                                doctor: includeDoctor,
+                            },
+                        },
                  },
             }
         )

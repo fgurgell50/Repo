@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import  { database } from "@/infra//DatabaseService";
-import PatientController from "@/application/controller/PatienteController";
+import PatientController from "@/application/controller/PatientController";
 import CreatePatientUseCase from "@/application/useCases/patient/CreatePatient";
 import CreateAppointementUseCase from "@/application/useCases/patient/CreateAppointment";
 import AuthenticatePatientUseCase from "@/application/useCases/patient/AuthenticatePatient";
+import GetPatientByPhoneUseCase from "@/application/useCases/patient/GetPatientByPhone";
 
 export default class PatientControllerImpl implements PatientController{
 
@@ -34,6 +35,14 @@ export default class PatientControllerImpl implements PatientController{
     const patient = await useCase.execute(phone, password)
 
     res.status(200).json(patient)
+    }
+
+    async getPatientByPhone(req: Request, res: Response){
+        const { phone } = req.params
+        const useCase = new GetPatientByPhoneUseCase(database)
+        const patient = await useCase.execute(phone)
+
+        res.status(200).json(patient)
     }
 
 }
