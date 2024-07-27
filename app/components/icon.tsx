@@ -1,9 +1,9 @@
 import { type SVGProps } from "react";
 
-type IconName = 'appointment' | 'arrow-left' | 'eye-off' | 'eye-off' | 'map'
+export type IconName = 'appointment' | 'arrow-left' | 'eye-off' | 'eye-on' | 'map'
 
 type IconProps = Readonly<{
-    name: string
+    name: IconName
     children?: React.ReactNode
     childrenClassName?: string
 }>
@@ -11,14 +11,20 @@ type IconProps = Readonly<{
 export function Icon({
     name, 
     children, 
-    className, 
     childrenClassName, 
     ...props
 }: SVGProps<SVGSVGElement> & IconProps) {
 
    if(children){
     // return icon with text
+    return(
+        <span className={`inline-flex items-center text-sm gap-1 ${childrenClassName}`}>
+            <Icon name={name} {...props} />
+            {children}
+        </span>)
    }
+
+
    // return icon svg
    return (
     <svg {...props}>
