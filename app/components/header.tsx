@@ -8,20 +8,20 @@ export function Header({
     iconName,
     iconClassName,
 }: Readonly<{ 
-    title: string; 
+    title?: string; 
     href: string; 
     children?: React.ReactNode;
     iconName?: IconName ; 
     iconClassName?: string;
  }>) {
     const iconNameFallBack = iconName ?? "arrow-left" 
-    console.log('HEADER', title, href)
+    const classNameDefault = 'flex w-full gap-5 items-center'
     return(
-        <div className="inline-flex gap-5 items-center">
+        <div className= {`${classNameDefault} ${children ? 'justify-between' : null}` }>
             {children || null }
             <Link 
                 href={href} 
-                className="h-10 w-10 flex items-center justify-center border border-[#f4f4f4] rounded-full hover:bg-slate-200 transition-all"
+                className="h-10 w-10 flex items-center justify-center border border-[#F4F4F4 rounded-full hover:bg-slate-200 transition-all"
             >
                 <Icon 
                     name={iconNameFallBack}
